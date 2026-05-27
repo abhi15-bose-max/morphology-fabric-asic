@@ -31,7 +31,7 @@
 # Vertical Morphology Simulation
 
 <p align="center">
-  <img src="diagonal_morphology.gif" width="700"/>
+  <img src="veritcal_morphology.gif" width="700"/>
 </p>
 
 ---
