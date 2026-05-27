@@ -4,6 +4,63 @@
 
 ---
 
+# 8x8 Fabric Layout
+
+<p align="center">
+  <img src="morpho_cell_8x8.png" width="700"/>
+</p>
+
+---
+
+# Single Processing Element (PE)
+
+<p align="center">
+  <img src="morpho_cell.png" width="350"/>
+</p>
+
+---
+
+# 4x4 Morphology Fabric
+
+<p align="center">
+  <img src="morpho_cell_4x4.png" width="500"/>
+</p>
+
+---
+
+# Vertical Morphology Simulation
+
+<p align="center">
+  <img src="diagonal_morphology.gif" width="700"/>
+</p>
+
+---
+
+# Cross Structuring Element Simulation
+
+<p align="center">
+  <img src="cross_morphology.gif" width="700"/>
+</p>
+
+---
+
+# Dilation Simulation
+
+<p align="center">
+  <img src="dilation_morphology.gif" width="700"/>
+</p>
+
+---
+
+# Erosion Simulation
+
+<p align="center">
+  <img src="erosion_morphology.gif" width="700"/>
+</p>
+
+---
+---
+
 # Core Architecture Paradigm
 
 Traditional image processing architectures execute morphology sequentially by scanning image kernels across centralized memory using nested CPU/GPU loops.
