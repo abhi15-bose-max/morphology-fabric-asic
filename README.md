@@ -3,6 +3,84 @@
 > **A Hardware-Native, Non-von Neumann Spatial Coprocessor Implementing Programmable Image Morphology and Cellular Automata Dynamics on a Tiled Silicon Grid.**
 
 ---
+# Abstract
+
+This work presents a programmable Cellular Automata-inspired morphology accelerator implemented as a fully spatial, non-von Neumann hardware fabric. Unlike conventional FPGA or CPU/GPU morphology pipelines that rely on sequential sliding-window memory accesses, the proposed architecture physicalizes the image directly into a tiled silicon compute mesh composed of locally interacting processing elements (`morpho_cell`).
+
+Each processing element samples its local 3×3 neighborhood, applies a runtime-configurable structuring element mask (`se_mask`), and executes dilation or erosion operations using hardware-native OR/AND spatial logic. The system evolves synchronously across the grid, enabling global morphology behavior to emerge directly from localized neighbor interactions.
+
+The architecture supports programmable morphology kernels without requiring dedicated multiplexing networks through a lightweight neutralization-based masking strategy that dynamically injects OR-neutral (`0`) or AND-neutral (`1`) values depending on the active operating mode.
+
+The design was implemented in synthesizable Verilog RTL, verified through cycle-accurate simulation using Icarus Verilog, and physically realized using the OpenLane ASIC flow targeting the SKY130 process node. The repository includes full RTL sources, testbenches, simulation infrastructure, and generated GDSII layouts.
+
+This work demonstrates a hardware-native approach toward spatial image processing fabrics, Cellular Automata-inspired accelerators, and emergent local-interaction computation systems.
+
+---
+
+# Keywords
+
+- Mathematical Morphology
+- Cellular Automata
+- Spatial Computing
+- Non-von Neumann Architectures
+- ASIC Design
+- Hardware Acceleration
+- Morphological Image Processing
+- Processing Element Arrays
+- Parallel Computing
+- OpenLane
+- SKY130
+- Verilog RTL
+- Emergent Computation
+- Reconfigurable Hardware
+- Silicon Compute Fabrics
+
+---
+
+# Related Work
+
+Hardware acceleration of morphological image processing has been extensively explored, primarily using FPGA-based sliding-window architectures.
+
+Garcia-Valdovinos et al. (2015) presented a programmable morphological processor on FPGAs supporting variable structuring elements, enabling flexible kernel configurations beyond fixed-size operations.
+
+Similarly, reconfigurable morphological processors with programmable 3×3 kernels have been demonstrated on FPGA platforms, allowing configurable neighborhood patterns for dilation and erosion. However, these architectures rely heavily on sliding-window line buffers and sequential image streaming, maintaining the von Neumann bottleneck of repeated memory access during computation.
+
+FPGA implementations for real-time morphological processing have achieved high throughput through pipelined architectures containing register-based line buffers. A broad review of FPGA morphology accelerators confirms that sliding-window approaches dominate the field, with dilation implemented as spatial OR reductions and erosion implemented as spatial AND reductions across neighborhood kernels.
+
+Most prior implementations require:
+- dedicated buffering infrastructure
+- centralized memory movement
+- separate hardware datapaths for dilation and erosion
+- multiplexer-based masking structures
+
+Recent work has also explored Cellular Automata-based image processing systems for parallel spatial evolution. However, these efforts generally target generic CA computation and do not explicitly implement programmable mathematical morphology fabrics with configurable structuring elements.
+
+---
+
+## Distinction From Prior Work
+
+This work differs from prior art in several key aspects:
+
+1. **Non-von Neumann Spatial Fabric**  
+   The image itself becomes the compute fabric, eliminating sliding-window line buffers and reducing centralized memory bottlenecks.
+
+2. **Localized Emergent Computation**  
+   Global morphology behavior emerges entirely from local neighbor interactions between autonomous processing elements.
+
+3. **Zero-MUX Structuring Element Neutralization**  
+   Programmable morphology kernels are implemented through logic-neutral insertion rather than dedicated masking multiplexers.
+
+4. **Unified Dilation/Erosion Datapath**  
+   A single hardware fabric supports both dilation and erosion using only a runtime mode toggle.
+
+5. **Open-Source ASIC Realization**  
+   This repository provides complete RTL, simulation infrastructure, OpenLane flow integration, and generated GDSII layouts targeting the SKY130 ASIC process node.
+
+---
+
+This architecture therefore represents a hardware-native, Cellular Automata-inspired approach toward programmable morphology acceleration and emergent spatial computing systems.
+
+---
 
 # 8x8 Fabric Layout
 
