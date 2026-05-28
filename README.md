@@ -563,6 +563,6 @@ The repository includes:
 
 # Author
 
-Abhinav Basu, BS-MS student at IISER Pune, Email - abhinavbasu754@gmail.com
+Abhinav Basu, BS-MS student at IISER Pune
 
 
