@@ -82,7 +82,7 @@ This architecture therefore represents a hardware-native, Cellular Automata-insp
 
 ---
 
-# 8x8 Fabric Layout
+# 8x8 Fabric Layout(Fig 1)
 
 <p align="center">
   <img src="morpho_cell_8x8.png" width="700"/>
@@ -90,7 +90,7 @@ This architecture therefore represents a hardware-native, Cellular Automata-insp
 
 ---
 
-# Single Processing Element (PE)
+# Single Processing Element (PE) (Fig 2)
 
 <p align="center">
   <img src="morpho_cell.png" width="350"/>
@@ -98,7 +98,7 @@ This architecture therefore represents a hardware-native, Cellular Automata-insp
 
 ---
 
-# 4x4 Morphology Fabric
+# 4x4 Morphology Fabric (Fig 3)
 
 <p align="center">
   <img src="morpho_cell_4x4.png" width="500"/>
@@ -106,7 +106,7 @@ This architecture therefore represents a hardware-native, Cellular Automata-insp
 
 ---
 
-# Vertical Morphology Simulation
+# Vertical Morphology Simulation (Fig 4)
 
 <p align="center">
   <img src="vertical_morphology.gif" width="700"/>
@@ -114,7 +114,7 @@ This architecture therefore represents a hardware-native, Cellular Automata-insp
 
 ---
 
-# Cross Structuring Element Simulation
+# Cross Structuring Element Simulation (Fig 5)
 
 <p align="center">
   <img src="cross_morphology.gif" width="700"/>
@@ -122,7 +122,7 @@ This architecture therefore represents a hardware-native, Cellular Automata-insp
 
 ---
 
-# Dilation Simulation
+# Dilation Simulation (Fig 6)
 
 <p align="center">
   <img src="dilation_morphology.gif" width="700"/>
@@ -130,7 +130,7 @@ This architecture therefore represents a hardware-native, Cellular Automata-insp
 
 ---
 
-# Erosion Simulation
+# Erosion Simulation (Fig 7)
 
 <p align="center">
   <img src="erosion_morphology.gif" width="700"/>
