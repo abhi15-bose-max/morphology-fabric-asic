@@ -57,30 +57,9 @@ Recent work has also explored Cellular Automata-based image processing systems f
 
 ---
 
-## Distinction From Prior Work
 
-This work differs from prior art in several key aspects:
 
-1. **Non-von Neumann Spatial Fabric**  
-   The image itself becomes the compute fabric, eliminating sliding-window line buffers and reducing centralized memory bottlenecks.
 
-2. **Localized Emergent Computation**  
-   Global morphology behavior emerges entirely from local neighbor interactions between autonomous processing elements.
-
-3. **Zero-MUX Structuring Element Neutralization**  
-   Programmable morphology kernels are implemented through logic-neutral insertion rather than dedicated masking multiplexers.
-
-4. **Unified Dilation/Erosion Datapath**  
-   A single hardware fabric supports both dilation and erosion using only a runtime mode toggle.
-
-5. **Open-Source ASIC Realization**  
-   This repository provides complete RTL, simulation infrastructure, OpenLane flow integration, and generated GDSII layouts targeting the SKY130 ASIC process node.
-
----
-
-This architecture therefore represents a hardware-native, Cellular Automata-inspired approach toward programmable morphology acceleration and emergent spatial computing systems.
-
----
 
 # 8x8 Fabric Layout(Fig 1)
 
