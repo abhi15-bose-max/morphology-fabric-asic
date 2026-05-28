@@ -526,6 +526,162 @@ The repository includes:
 - OpenLane configuration
 - simulation infrastructure
 
+
+---
+
+# Beyond Image Processing
+
+Although the architecture was initially developed for mathematical morphology and spatial image operations, the underlying computational model extends far beyond conventional vision processing.
+
+The fabric fundamentally operates as a:
+
+> **programmable local-neighborhood spatial logic accelerator**
+
+where global behavior emerges from synchronized local interactions between neighboring processing elements.
+
+Because the architecture is based on:
+
+- local connectivity
+- synchronous evolution
+- programmable neighborhood logic
+- emergent spatial behavior
+
+it naturally maps onto several broader computational domains.
+
+---
+
+## 1. Robotics and Path Planning
+
+Morphological dilation is widely used in:
+
+- occupancy-grid expansion
+- obstacle inflation
+- autonomous navigation
+- motion-planning safety margins
+
+The architecture can spatially expand obstacle regions directly in hardware, enabling ultra-low-latency collision-field generation for robotic systems.
+
+---
+
+## 2. VLSI and Physical Design Automation
+
+Mathematical morphology is closely related to geometric operations used in:
+
+- design-rule checking (DRC)
+- lithography verification
+- metal-spacing analysis
+- hotspot detection
+
+Dilation and erosion correspond naturally to geometric expansion and contraction operations on layout masks and routing geometries.
+
+---
+
+## 3. Cellular Automata and Emergent Systems
+
+The fabric behaves similarly to a programmable Cellular Automata (CA) engine:
+
+- local rules
+- neighbor interactions
+- synchronous updates
+- emergent global evolution
+
+This enables experimentation with:
+
+- growth systems
+- pattern formation
+- self-organization
+- distributed computation
+
+using pure digital hardware.
+
+---
+
+## 4. Graph and Propagation Computing
+
+Morphological propagation resembles graph-frontier expansion.
+
+For example:
+
+- dilation behaves similarly to neighborhood activation spreading
+- erosion behaves similarly to spatial suppression
+
+This creates direct connections to:
+
+- breadth-first search (BFS)
+- flood-fill algorithms
+- spatial graph propagation
+- distributed routing systems
+
+---
+
+## 5. Neuromorphic and Bio-Inspired Hardware
+
+The architecture exhibits characteristics commonly found in neuromorphic systems:
+
+- local communication
+- distributed state evolution
+- spatial activation fields
+- emergent computation
+
+This makes the fabric relevant for:
+
+- bio-inspired accelerators
+- spatial neural systems
+- local inhibition/activation networks
+- unconventional computing research
+
+---
+
+## 6. Smart Sensor and Edge-Vision Hardware
+
+The architecture enables computation directly inside spatial sensor fabrics.
+
+Instead of transferring raw image data to a centralized processor, local morphology operations can be executed directly on-chip, reducing:
+
+- memory bandwidth
+- energy consumption
+- latency
+
+This is particularly valuable for:
+
+- robotics
+- drones
+- embedded vision
+- low-power edge AI systems
+
+---
+
+## 7. Computational Geometry and Spatial Computing
+
+The morphology fabric can also be interpreted as a spatial computing substrate for geometric field evolution.
+
+The architecture shares conceptual similarities with:
+
+- Minkowski operations
+- distance transforms
+- occupancy-field propagation
+- lattice-based computation
+
+where computation emerges from local spatial interactions rather than centralized sequential execution.
+
+---
+
+## Architectural Perspective
+
+Taken more broadly, the processor represents a form of:
+
+> **non-von Neumann spatial computing**
+
+where:
+
+- memory and computation coexist locally
+- global behavior emerges from distributed interactions
+- the grid itself becomes the compute substrate
+
+rather than relying on centralized instruction execution.
+
+This positions the architecture not merely as an image-processing accelerator, but as a general-purpose experimental platform for spatial and emergent computation research.
+
 ---
 
 # Future Directions
