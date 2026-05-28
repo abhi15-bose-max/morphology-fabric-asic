@@ -698,6 +698,6 @@ This positions the architecture not merely as an image-processing accelerator, b
 
 # Author
 
-Abhinav Basu, BS-MS student at IISER Pune, abhinavbasu754@gmail.com
+Abhinav Basu
 
 
