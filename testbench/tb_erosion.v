@@ -1,3 +1,10 @@
+// ============================================================================
+// Copyright (c) 2026 Abhinav Basu (abhi15-bose-max)
+// This source code is licensed under the MIT license found in the 
+// LICENSE file in the root directory of this source tree.
+// ============================================================================
+
+
 `timescale 1ns/1ps
 
 module tb_erosion;
