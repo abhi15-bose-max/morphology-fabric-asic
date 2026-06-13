@@ -1,0 +1,46 @@
+name: Morphology Fabric Synthesis
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  synth:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Yosys
+        run: |
+          sudo apt update
+          sudo apt install -y yosys
+
+      - name: Show Repository Structure
+        run: |
+          find .
+
+      - name: Run Synthesis
+        run: |
+          yosys -p "
+            read_verilog rtl/morpho_cell.v rtl/morpho_grid_8x8.v
+
+            hierarchy -check -top morpho_grid_8x8
+
+            proc
+            opt
+            synth
+
+            stat
+          " > synthesis_report.txt
+
+      - name: Show Synthesis Report
+        run: |
+          cat synthesis_report.txt
+
+      - name: Upload Synthesis Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: morphology-synthesis-report
+          path: synthesis_report.txt
