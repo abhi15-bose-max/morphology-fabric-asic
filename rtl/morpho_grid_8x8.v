@@ -79,12 +79,7 @@ generate
 endgenerate
 
 always @(posedge clk) begin
-
-    if (^next_pixels === 1'bx)
-        pixels <= pixels;
-    else
-        pixels <= next_pixels;
-
+    pixels <= next_pixels;
 end
 
 assign pixels_out = pixels;
