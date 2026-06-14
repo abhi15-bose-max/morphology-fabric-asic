@@ -1,0 +1,105 @@
+name: Morphology Bitstream Generation
+
+on:
+  workflow_dispatch:
+
+jobs:
+  morphology_bitstream:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    ####################################################
+    # Checkout
+    ####################################################
+
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    ####################################################
+    # Install FPGA Toolchain
+    ####################################################
+
+    - name: Install FPGA Tools
+      run: |
+        sudo apt update
+
+        sudo apt install -y \
+          yosys \
+          nextpnr-ecp5 \
+          fpga-icestorm
+
+    ####################################################
+    # Verify Installation
+    ####################################################
+
+    - name: Show Tool Versions
+      run: |
+        yosys -V
+        nextpnr-ecp5 --version || true
+        ecppack --help | head -5 || true
+
+    ####################################################
+    # FPGA Synthesis
+    ####################################################
+
+    - name: Synthesize Morpho Grid 8x8
+      run: |
+        yosys -p "
+          read_verilog rtl/morpho_cell.v
+          read_verilog rtl/morpho_grid_8x8.v
+
+          hierarchy -check -top morpho_grid_8x8
+
+          synth_ecp5 -json morpho_grid_8x8.json
+
+          stat
+        " > synthesis_report.txt
+
+    ####################################################
+    # Place and Route
+    ####################################################
+
+    - name: Run nextpnr
+      run: |
+        nextpnr-ecp5 \
+          --25k \
+          --package CABGA381 \
+          --json morpho_grid_8x8.json \
+          --textcfg morpho_grid_8x8.config \
+          --freq 12 \
+          > nextpnr_report.txt
+
+    ####################################################
+    # Generate Bitstream
+    ####################################################
+
+    - name: Generate Bitstream
+      run: |
+        ecppack \
+          morpho_grid_8x8.config \
+          morpho_grid_8x8.bit
+
+    ####################################################
+    # Show Generated Files
+    ####################################################
+
+    - name: List Outputs
+      run: |
+        ls -lh
+
+    ####################################################
+    # Upload Bitstream Package
+    ####################################################
+
+    - name: Upload Morphology Bitstream
+      uses: actions/upload-artifact@v4
+      with:
+        name: morphology-bitstream-package
+        path: |
+          morpho_grid_8x8.json
+          morpho_grid_8x8.config
+          morpho_grid_8x8.bit
+          synthesis_report.txt
+          nextpnr_report.txt
