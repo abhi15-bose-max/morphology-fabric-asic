@@ -1,4 +1,4 @@
-name: Morphology Fabric Synthesis
+name: Morphology Fabric Multi-Synthesis
 
 on:
   push:
@@ -21,7 +21,59 @@ jobs:
         run: |
           find .
 
-      - name: Run Synthesis
+      ############################################################
+      # Single Cell
+      ############################################################
+
+      - name: Synthesize morpho_cell
+        run: |
+          yosys -p "
+            read_verilog rtl/morpho_cell.v
+
+            hierarchy -check -top morpho_cell
+
+            proc
+            opt
+            synth
+
+            stat
+          " > morpho_cell_report.txt
+
+      - name: Upload morpho_cell Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: morpho-cell-report
+          path: morpho_cell_report.txt
+
+      ############################################################
+      # 4x4 Grid
+      ############################################################
+
+      - name: Synthesize morpho_grid_4x4
+        run: |
+          yosys -p "
+            read_verilog rtl/morpho_cell.v rtl/morpho_grid_4x4.v
+
+            hierarchy -check -top morpho_grid_4x4
+
+            proc
+            opt
+            synth
+
+            stat
+          " > morpho_grid_4x4_report.txt
+
+      - name: Upload morpho_grid_4x4 Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: morpho-grid-4x4-report
+          path: morpho_grid_4x4_report.txt
+
+      ############################################################
+      # 8x8 Grid
+      ############################################################
+
+      - name: Synthesize morpho_grid_8x8
         run: |
           yosys -p "
             read_verilog rtl/morpho_cell.v rtl/morpho_grid_8x8.v
@@ -33,14 +85,27 @@ jobs:
             synth
 
             stat
-          " > synthesis_report.txt
+          " > morpho_grid_8x8_report.txt
 
-      - name: Show Synthesis Report
-        run: |
-          cat synthesis_report.txt
-
-      - name: Upload Synthesis Report
+      - name: Upload morpho_grid_8x8 Report
         uses: actions/upload-artifact@v4
         with:
-          name: morphology-synthesis-report
-          path: synthesis_report.txt
+          name: morpho-grid-8x8-report
+          path: morpho_grid_8x8_report.txt
+
+      ############################################################
+      # Summary in Logs
+      ############################################################
+
+      - name: Print Reports
+        run: |
+          echo "===== MORPHO CELL ====="
+          tail -n 50 morpho_cell_report.txt
+
+          echo ""
+          echo "===== MORPHO GRID 4x4 ====="
+          tail -n 50 morpho_grid_4x4_report.txt
+
+          echo ""
+          echo "===== MORPHO GRID 8x8 ====="
+          tail -n 50 morpho_grid_8x8_report.txt
