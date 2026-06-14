@@ -1,0 +1,61 @@
+name: Morphology FPGA PnR
+
+on:
+  workflow_dispatch:
+
+jobs:
+  pnr:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install FPGA Tools
+        run: |
+          sudo apt update
+          sudo apt install -y yosys nextpnr-ecp5
+
+      ###################################################
+      # Generate ECP5 JSON
+      ###################################################
+
+      - name: Synthesize 8x8 Grid
+        run: |
+          yosys -p "
+            read_verilog rtl/morpho_cell.v rtl/morpho_grid_8x8.v
+
+            hierarchy -top morpho_grid_8x8
+
+            synth_ecp5 \
+              -top morpho_grid_8x8 \
+              -json morpho_grid_8x8.json
+          "
+
+      ###################################################
+      # Place and Route
+      ###################################################
+
+      - name: Run nextpnr
+        run: |
+          nextpnr-ecp5 \
+            --25k \
+            --package CABGA381 \
+            --json morpho_grid_8x8.json \
+            --textcfg morpho_grid_8x8.config \
+            > nextpnr_report.txt 2>&1
+
+      ###################################################
+      # Upload Results
+      ###################################################
+
+      - name: Upload PnR Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: morphology-pnr-results
+          path: |
+            morpho_grid_8x8.json
+            morpho_grid_8x8.config
+            nextpnr_report.txt
