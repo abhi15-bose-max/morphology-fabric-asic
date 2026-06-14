@@ -1,0 +1,19 @@
+name: Test nextpnr
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Install nextpnr
+        run: |
+          sudo apt update
+          sudo apt install -y nextpnr-ecp5
+
+      - name: Show Version
+        run: |
+          nextpnr-ecp5 --version
