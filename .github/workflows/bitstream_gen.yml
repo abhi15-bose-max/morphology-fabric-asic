@@ -30,7 +30,18 @@ jobs:
           nextpnr-ecp5 \
           fpga-icestorm
 
+    - name: Search for Trellis Packages
+      run: |
+        echo "=== TRELLIS ==="
+        apt-cache search trellis
 
+         echo
+         echo "=== ECP5 ==="
+         apt-cache search ecp5
+
+         echo
+         echo "=== PRJTRELLIS ==="
+         apt-cache search prjtrellis
 
      ####################################################
     # DIAGNOSTIC STEP
