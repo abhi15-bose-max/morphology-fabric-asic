@@ -1,0 +1,85 @@
+name: Morphology FPGA Synthesis
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  fpga_synth:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Yosys
+        run: |
+          sudo apt update
+          sudo apt install -y yosys
+
+      ####################################################
+      # MORPHO CELL
+      ####################################################
+
+      - name: Synthesize Morpho Cell (ECP5)
+        run: |
+          yosys -p "
+            read_verilog rtl/morpho_cell.v
+            hierarchy -check -top morpho_cell
+            synth_ecp5 -json morpho_cell.json
+            stat
+          " > morpho_cell_fpga.txt
+
+      ####################################################
+      # MORPHO GRID 4x4
+      ####################################################
+
+      - name: Synthesize Morpho Grid 4x4 (ECP5)
+        run: |
+          yosys -p "
+            read_verilog rtl/morpho_cell.v rtl/morpho_grid_4x4.v
+            hierarchy -check -top morpho_grid_4x4
+            synth_ecp5 -json morpho_grid_4x4.json
+            stat
+          " > morpho_grid_4x4_fpga.txt
+
+      ####################################################
+      # MORPHO GRID 8x8
+      ####################################################
+
+      - name: Synthesize Morpho Grid 8x8 (ECP5)
+        run: |
+          yosys -p "
+            read_verilog rtl/morpho_cell.v rtl/morpho_grid_8x8.v
+            hierarchy -check -top morpho_grid_8x8
+            synth_ecp5 -json morpho_grid_8x8.json
+            stat
+          " > morpho_grid_8x8_fpga.txt
+
+      ####################################################
+      # Upload Reports
+      ####################################################
+
+      - name: Upload FPGA Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: morphology-fpga-reports
+          path: |
+            morpho_cell_fpga.txt
+            morpho_grid_4x4_fpga.txt
+            morpho_grid_8x8_fpga.txt
+
+      ####################################################
+      # Upload FPGA Netlists
+      ####################################################
+
+      - name: Upload FPGA Netlists
+        uses: actions/upload-artifact@v4
+        with:
+          name: morphology-ecp5-netlists
+          path: |
+            morpho_cell.json
+            morpho_grid_4x4.json
+            morpho_grid_8x8.json
