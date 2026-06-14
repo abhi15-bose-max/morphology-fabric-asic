@@ -1,0 +1,20 @@
+- name: Find ECP5 Tools
+  run: |
+    echo "=== Checking PATH ==="
+
+    which yosys || true
+    which nextpnr-ecp5 || true
+    which ecppack || true
+
+    echo
+    echo "=== Searching /usr/bin ==="
+
+    ls /usr/bin | grep ecp || true
+    ls /usr/bin | grep trellis || true
+
+    echo
+    echo "=== Installed FPGA Packages ==="
+
+    dpkg -l | grep fpga || true
+    dpkg -l | grep trellis || true
+    dpkg -l | grep nextpnr || true
